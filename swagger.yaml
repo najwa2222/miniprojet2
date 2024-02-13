@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: API de gestion des tâches
+  description: Documentation de l'API de gestion des tâches
+  version: 1.0.0
+paths:
+  /tasks:
+    get:
+      summary: Liste des tâches
+      responses:
+        '200':
+          description: Réussite de la requête
+    post:
+      summary: Créer une nouvelle tâche
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+      responses:
+        '201':
+          description: Tâche créée avec succès
+        '400':
+          description: Requête incorrecte
+  /tasks/{id}:
+    get:
+      summary: Obtenir les détails d'une tâche
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Réussite de la requête
+        '404':
+          description: Tâche non trouvée
+    put:
+      summary: Mettre à jour les détails d'une tâche
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Tâche mise à jour avec succès
+        '404':
+          description: Tâche non trouvée
+    delete:
+      summary: Supprimer une tâche
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tâche supprimée avec succès
+        '404':
+          description: Tâche non trouvée
